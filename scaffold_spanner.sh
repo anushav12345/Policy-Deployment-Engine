@@ -29,9 +29,8 @@ variables := {
 EOF
 
 mkdir -p "$POL/google_spanner_instance/force_destroy"
-cat > "$POL/google_spanner_instance/force_destroy/policy.r#!/usr/bin/env bash
-set -euo pipefail
-[[ -d "policies/gcp/cloud_spanner/_instance.force_destroy
+cat > "$POL/google_spanner_instance/force_destroy/policy.rego" <<'EOF'
+package terraform.gcp.security.cloud_spanner.google_spanner_instance.force_destroy
 import data.terraform.helpers
 import data.terraform.gcp.security.cloud_spanner.google_spanner_instance.vars
 
