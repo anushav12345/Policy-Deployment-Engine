@@ -10,7 +10,7 @@ Reference: [Terraform Registry – spanner_backup_schedule](https://registry.ter
 
 | Argument | Description | Required | Security Impact | Rationale | Compliant | Non-Compliant |
 |----------|-------------|----------|-----------------|-----------|-----------|---------------|
-| `retention_duration` | At what relative time in the future, compared to its creation time, the backup should be deleted, e.g. keep backups for 7 days. A duration in seconds with up to nine fractional digits, ending with 's'. Example: '3.5s'. You can set this to a value up to 366 days. | true | false | None | None | None |
+| `retention_duration` | At what relative time in the future, compared to its creation time, the backup should be deleted, e.g. keep backups for 7 days. A duration in seconds with up to nine fractional digits, ending with 's'. Example: '3.5s'. You can set this to a value up to 366 days. | true | true | Setting an appropriate retention duration ensures backups are available for recovery within a required window. Too short a retention period may leave the organisation unable to recover from data loss incidents. | None | None |
 | `instance` | The instance to create the database on. | true | false | None | None | None |
 | `database` | The database to create the backup schedule on. | true | false | None | None | None |
 | `name` | A unique identifier for the backup schedule, which cannot be changed after the backup schedule is created. Values are of the form [a-z][-a-z0-9]*[a-z0-9]. | false | false | None | None | None |
@@ -32,7 +32,7 @@ Reference: [Terraform Registry – spanner_backup_schedule](https://registry.ter
 | Argument | Description | Required | Security Impact | Rationale | Compliant | Non-Compliant |
 |----------|-------------|----------|-----------------|-----------|-----------|---------------|
 | `encryption_type` | The encryption type of backups created by the backup schedule. Possible values are USE_DATABASE_ENCRYPTION, GOOGLE_DEFAULT_ENCRYPTION, or CUSTOMER_MANAGED_ENCRYPTION. If you use CUSTOMER_MANAGED_ENCRYPTION, you must specify a kmsKeyName. If your backup type is incremental-backup, the encryption type must be GOOGLE_DEFAULT_ENCRYPTION. Possible values are: `USE_DATABASE_ENCRYPTION`, `GOOGLE_DEFAULT_ENCRYPTION`, `CUSTOMER_MANAGED_ENCRYPTION`. | true | false | None | None | None |
-| `kms_key_name` | The resource name of the Cloud KMS key to use for encryption. Format: 'projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}' | false | false | None | None | None |
+| `kms_key_name` | The resource name of the Cloud KMS key to use for encryption. Format: 'projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}' | false | true | Specifying a customer-managed KMS key ensures backups are encrypted with organisation-controlled keys, reducing risk of unauthorised access. | None | None |
 | `kms_key_names` | Fully qualified name of the KMS keys to use to encrypt this database. The keys must exist in the same locations as the Spanner Database. | false | false | None | None | None |
 
 ### cron_spec Block

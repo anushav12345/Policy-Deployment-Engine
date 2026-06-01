@@ -97,8 +97,8 @@
     "edition": {
       "description": "The edition selected for this instance. Different editions provide different capabilities at different price points. Possible values are: `EDITION_UNSPECIFIED`, `STANDARD`, `ENTERPRISE`, `ENTERPRISE_PLUS`.",
       "required": false,
-      "security_impact": null,
-      "rationale": null,
+      "security_impact": true,
+      "rationale": "Requiring an explicit edition prevents use of EDITION_UNSPECIFIED which leads to unpredictable behaviour and unclear security posture.",
       "compliant": null,
       "non-compliant": null,
       "parent": null
